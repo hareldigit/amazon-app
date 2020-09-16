@@ -16,7 +16,7 @@
   height: 30px;
   object-fit: contain;
   margin: 0 20px;
-  margin-top: 18px;
+  margin-top: 15px;
 }
 
 .header__search {
@@ -59,4 +59,15 @@
   margin-left: 10px;
   margin-right: 10px;
   color: white;
+}
+
+.header__optionBasket {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.header__basketCount {
+  margin-left: 10px;
+  margin-right: 10px;
 }
