@@ -2,8 +2,14 @@ import React from 'react'
 import './Header.css'
 import { Search, ShoppingBasket } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
+import { useStateValue } from '../../StateProvider'
 
 function Header() {
+  const [{ basket }, dispatch] = useStateValue()
+  const totalQuantity = (total, item) => {
+    return total + (item?.quantity ?? 0)
+  }
+
   return (
     <div className="header">
       <Link to={'/'}>
@@ -29,7 +35,9 @@ function Header() {
         <Link to={'/checkout'}>
           <div className="header__optionBasket">
             <ShoppingBasket />
-            <span className="header__optionLineTwo header__basketCount">0</span>
+            <span className="header__optionLineTwo header__basketCount">
+              {basket?.reduce(totalQuantity, 0)}
+            </span>
           </div>
         </Link>
       </div>

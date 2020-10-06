@@ -1,7 +1,40 @@
 import React from 'react'
 import './Product.css'
 
-function Product({ title, image, price, rating }) {
+import { useStateValue } from '../../StateProvider'
+
+function Product({
+  id,
+  title,
+  image,
+  price,
+  rating,
+  includeAddToBasket,
+  includeRemoveFromBasket,
+}) {
+  const [{ basket }, dispatch] = useStateValue()
+  const addToBasket = () => {
+    dispatch({
+      type: 'ADD_TO_BASKET',
+      item: {
+        id,
+        title,
+        image,
+        price,
+        rating,
+      },
+    })
+  }
+
+  const removeFromBasket = () => {
+    dispatch({
+      type: 'REMOVE_FROM_BASKET',
+      item: {
+        id,
+      },
+    })
+  }
+
   return (
     <div className="product">
       <div className="product__info">
@@ -14,14 +47,19 @@ function Product({ title, image, price, rating }) {
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <span role="img" aria-label="">
+              <span key={i} role="img" aria-label="">
                 🌟
               </span>
             ))}
         </div>
       </div>
       <img src={image} alt="" />
-      <button>Add to Basket</button>
+      {includeAddToBasket && (
+        <button onClick={addToBasket}>Add to Basket</button>
+      )}
+      {includeRemoveFromBasket && (
+        <button onClick={removeFromBasket}>Remove from Basket</button>
+      )}
     </div>
   )
 }
