@@ -19,7 +19,6 @@ function Home() {
             price={429.99}
             image="https://m.media-amazon.com/images/I/71S31CWSs3L._AC_UL320_.jpg"
             rating={4}
-            includeAddToBasket={true}
           />
           <Product
             id="2"
@@ -27,7 +26,6 @@ function Home() {
             price={275.75}
             image="https://images-na.ssl-images-amazon.com/images/I/71zrQU%2ByLvL._AC_SL1500_.jpg"
             rating={3}
-            includeAddToBasket={true}
           />
         </div>
         <div className="home__row">
@@ -37,7 +35,6 @@ function Home() {
             price={169.99}
             image="https://images-na.ssl-images-amazon.com/images/I/819WMWm6NoL._AC_SX679_.jpg"
             rating={5}
-            includeAddToBasket={true}
           />
           <Product
             id="4"
@@ -45,7 +42,6 @@ function Home() {
             price={119.99}
             image="https://images-na.ssl-images-amazon.com/images/I/71trhuzbhML._AC_SY606_.jpg"
             rating={4}
-            includeAddToBasket={true}
           />
           <Product
             id="5"
@@ -53,7 +49,6 @@ function Home() {
             price={49.99}
             image="https://images-na.ssl-images-amazon.com/images/I/61iAmGshpsL._AC_SX425_.jpg"
             rating={5}
-            includeAddToBasket={true}
           />
         </div>
         <div className="home__row">
@@ -63,7 +58,6 @@ function Home() {
             price={9.99}
             image="https://images-na.ssl-images-amazon.com/images/I/61j17FjPhtL._AC_SL1500_.jpg"
             rating={3}
-            includeAddToBasket={true}
           />
         </div>
       </div>
