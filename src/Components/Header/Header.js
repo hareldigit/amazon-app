@@ -8,7 +8,7 @@ function Header() {
   const [totalPrice, totalQuantity] = useTotalBasket()
   return (
     <div className="header">
-      <Link to={'/'}>
+      <Link to='/'>
         <div className="header__logo"></div>
       </Link>
       <div className="header__search">
@@ -16,10 +16,12 @@ function Header() {
         <Search className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <div className="header__option">
-          <div className="header__optionLineOne">Hello Guest</div>
-          <div className="header__optionLineTwo">Sign In</div>
-        </div>
+        <Link to="/login">
+          <div className="header__option">
+            <div className="header__optionLineOne">Hello Guest</div>
+            <div className="header__optionLineTwo">Sign In</div>
+          </div>
+        </Link>
         <div className="header__option">
           <div className="header__optionLineOne">Returns</div>
           <div className="header__optionLineTwo">& Oreders</div>
