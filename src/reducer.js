@@ -1,4 +1,4 @@
-export const initialState = { basket: [] }
+export const initialState = { basket: [], user: null }
 
 const isExistsOnBasket = (item, basket) => {
   return basket.some((p) => p.id === item.id)
@@ -53,6 +53,12 @@ const reducer = (state, action) => {
           state.basket,
           action.item.quantity,
         ),
+      }
+    }
+    case 'SET_USER': {
+      return {
+        ...state,
+        user: action.user,
       }
     }
     default: {

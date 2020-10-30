@@ -3,12 +3,14 @@ import './Header.css'
 import { Search, ShoppingBasket } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import useTotalBasket from '../../CustomHooks/useTotalBasket'
+import { auth } from '../../firebase'
 
-function Header() {
+function Header({ user, signOut }) {
   const [totalPrice, totalQuantity] = useTotalBasket()
+
   return (
     <div className="header">
-      <Link to='/'>
+      <Link to="/">
         <div className="header__logo"></div>
       </Link>
       <div className="header__search">
@@ -16,12 +18,24 @@ function Header() {
         <Search className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <Link to="/login">
+        {!user && (
+          <Link to="/login">
+            <div className="header__option">
+              <div className="header__optionLineOne">Hello Guest</div>
+              <div className="header__optionLineTwo">Sign In</div>
+            </div>
+          </Link>
+        )}
+        {user && (
           <div className="header__option">
-            <div className="header__optionLineOne">Hello Guest</div>
-            <div className="header__optionLineTwo">Sign In</div>
+            <div className="header__optionLineOne">
+              Hello <b>{user}</b>
+            </div>
+            <div className="header__optionLineTwo" onClick={signOut}>
+              Sign Out
+            </div>
           </div>
-        </Link>
+        )}
         <div className="header__option">
           <div className="header__optionLineOne">Returns</div>
           <div className="header__optionLineTwo">& Oreders</div>

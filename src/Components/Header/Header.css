@@ -47,6 +47,9 @@
   font-size: 13px;
   font-weight: 800;
 }
+.header__optionLineTwo:hover {
+  cursor: pointer;
+}
 
 .header__nav {
   display: flex;
