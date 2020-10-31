@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="app">
       <Router>
-        <Header user={getUserNameFromEmail()} />
+        <Header userName={getUserNameFromEmail()} />
         <Switch>
           <Route path="/Login">
             <Login />
