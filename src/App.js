@@ -5,21 +5,10 @@ import Home from './Components/Home/Home'
 import Checkout from './Components/Checkout/Checkout'
 import Login from './Components/Login/Login'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { auth } from './firebase'
-import { useStateValue } from './StateProvider'
-function App() {
-  const [{ user }, dispatch] = useStateValue()
+import useUser from './CustomHooks/useUser'
 
-  useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      console.log('THE USER IS >>>>', authUser)
-      if (authUser) {
-        dispatch({ type: 'SET_USER', user: authUser })
-      } else {
-        dispatch({ type: 'SET_USER', user: null })
-      }
-    })
-  }, [])
+function App() {
+  const [] = useUser()
   return (
     <div className="app">
       <Router>

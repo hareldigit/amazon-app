@@ -3,23 +3,12 @@ import './Header.css'
 import { Search, ShoppingBasket } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import useTotalBasket from '../../CustomHooks/useTotalBasket'
-import { auth } from '../../firebase'
-import { useStateValue } from '../../StateProvider'
+import useUser from '../../CustomHooks/useUser'
 
 function Header() {
   const [totalPrice, totalQuantity] = useTotalBasket()
-  const [{ user }, dispatch] = useStateValue()
-  const [userName, setUserName] = useState('')
+  const [user, userName, handleAuthentication] = useUser(null)
 
-  useEffect(() => {
-    setUserName(user?.userName)
-  }, [user])
-
-  const handleAuthentication = () => {
-    if (user) {
-      auth.signOut()
-    }
-  }
   return (
     <div className="header">
       <Link to="/">
@@ -33,7 +22,7 @@ function Header() {
         <Link to={!userName && '/login'}>
           <div onClick={handleAuthentication} className="header__option">
             <div className="header__optionLineOne">
-              Hello {!userName ? ' Guest' : <b> {userName}</b>}
+              Hello {!userName ? ' Guest' : <b></b>} {userName}
             </div>
             <div className="header__optionLineTwo">
               {!userName ? 'Sign In' : 'Sign Out'}
