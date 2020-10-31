@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Header.css'
 import { Search, ShoppingBasket } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import useTotalBasket from '../../CustomHooks/useTotalBasket'
 import { auth } from '../../firebase'
+import { useStateValue } from '../../StateProvider'
 
-function Header({ userName }) {
+function Header() {
   const [totalPrice, totalQuantity] = useTotalBasket()
+  const [{ user }, dispatch] = useStateValue()
+  const [userName, setUserName] = useState('')
+
+  useEffect(() => {
+    setUserName(user?.userName)
+  }, [user])
+
   const handleAuthentication = () => {
-    if (userName) {
+    if (user) {
       auth.signOut()
     }
   }

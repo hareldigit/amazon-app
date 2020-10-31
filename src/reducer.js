@@ -1,5 +1,14 @@
 export const initialState = { basket: [], user: null }
 
+const getUserNameFromEmail = (email) => {
+  let userName = null
+  if (email) {
+    var splited = email.split('@')
+    userName = splited[0]
+  }
+  return userName
+}
+
 const isExistsOnBasket = (item, basket) => {
   return basket.some((p) => p.id === item.id)
 }
@@ -58,7 +67,10 @@ const reducer = (state, action) => {
     case 'SET_USER': {
       return {
         ...state,
-        user: action.user,
+        user: {
+          ...action.user,
+          userName: getUserNameFromEmail(action.user?.email),
+        },
       }
     }
     default: {
