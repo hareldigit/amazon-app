@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 import useTotalBasket from '../../CustomHooks/useTotalBasket'
 import { auth } from '../../firebase'
 
-function Header({ user }) {
+function Header({ userName }) {
   const [totalPrice, totalQuantity] = useTotalBasket()
   const handleAuthentication = () => {
-    if (user) {
+    if (userName) {
       auth.signOut()
     }
   }
@@ -22,13 +22,13 @@ function Header({ user }) {
         <Search className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <Link to={!user && '/login'}>
+        <Link to={!userName && '/login'}>
           <div onClick={handleAuthentication} className="header__option">
             <div className="header__optionLineOne">
-              Hello {!user ? ' Guest' : <b> {user}</b>}
+              Hello {!userName ? ' Guest' : <b> {userName}</b>}
             </div>
             <div className="header__optionLineTwo">
-              {!user ? 'Sign In' : 'Sign Out'}
+              {!userName ? 'Sign In' : 'Sign Out'}
             </div>
           </div>
         </Link>
