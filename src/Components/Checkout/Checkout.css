@@ -12,6 +12,11 @@
   object-position: center;
   margin-bottom: 10px;
 }
+
+.checkout__hello {
+  padding-left: 10px;
+}
+
 .checkout__title {
   margin-right: 10px;
   padding: 10px;

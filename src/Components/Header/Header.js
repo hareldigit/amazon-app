@@ -7,7 +7,7 @@ import useUser from '../../CustomHooks/useUser'
 
 function Header() {
   const [totalPrice, totalQuantity] = useTotalBasket()
-  const [user, userName, handleAuthentication] = useUser(null)
+  const [user, userName, handleAuthentication] = useUser()
 
   return (
     <div className="header">
