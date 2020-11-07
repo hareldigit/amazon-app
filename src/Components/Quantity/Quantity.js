@@ -2,7 +2,7 @@ import React from 'react'
 import './Quantity.css'
 import { useStateValue } from '../../StateProvider'
 
-function Quantity({ id, quantity }) {
+function Quantity({ id, quantity, editMode }) {
   const [{ basket }, dispatch] = useStateValue()
   const changeQuantity = (event) => {
     dispatch({
@@ -15,7 +15,12 @@ function Quantity({ id, quantity }) {
   }
   return (
     <div className="quantity">
-      Qty: <input type="number" onChange={changeQuantity} value={quantity} />
+      Qty:{' '}
+      {editMode ? (
+        <input type="number" onChange={changeQuantity} value={quantity} />
+      ) : (
+        <span>{quantity}</span>
+      )}
     </div>
   )
 }

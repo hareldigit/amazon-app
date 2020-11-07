@@ -2,9 +2,9 @@ import React from 'react'
 import './Checkout.css'
 import Subtotal from '../Subtotal/Subtotal'
 import CheckoutProduct from '../CheckoutProduct/CheckoutProduct'
-import Quantity from '../Quantity/Quantity'
 import { useStateValue } from '../../StateProvider'
 import useUser from '../../CustomHooks/useUser'
+import { useHistory } from 'react-router-dom'
 
 function Checkout() {
   const [{ basket }, dispatch] = useStateValue()
@@ -22,17 +22,17 @@ function Checkout() {
           <h2 className="checkout__title">Your shopping Basket</h2>
         </div>
         {basket?.map((item, i) => (
-          <>
+          <React.Fragment key={i}>
             <CheckoutProduct
-              key={i}
               id={item.id}
               title={item.title}
               price={item.price}
               image={item.image}
               rating={item.rating}
+              quantity={item.quantity}
+              editMode={true}
             />
-            <Quantity key={i} quantity={item.quantity} id={item.id} />
-          </>
+          </React.Fragment>
         ))}
       </div>
       <div className="checkout__right">

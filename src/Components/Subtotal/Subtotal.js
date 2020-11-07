@@ -2,9 +2,11 @@ import React from 'react'
 import './Subtotal.css'
 import CurrencyFormat from '../CurrencyFormat/CurrencyFormat'
 import useTotalBasket from '../../CustomHooks/useTotalBasket'
+import { useHistory } from 'react-router-dom'
 
 function Subtotal() {
   const [totalPrice, totalQuantity] = useTotalBasket()
+  const history = useHistory()
   return (
     <div className="subtotal">
       <CurrencyFormat
@@ -24,7 +26,9 @@ function Subtotal() {
         thousandSeparator={true}
         prefix={'$'}
       />
-      <button>proceed to Checkout</button>
+      <button onClick={(e) => history.push('/payment')}>
+        proceed to Checkout
+      </button>
     </div>
   )
 }

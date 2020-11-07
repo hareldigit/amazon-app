@@ -1,9 +1,17 @@
 import React from 'react'
 import './CheckoutProduct.css'
-
+import Quantity from '../Quantity/Quantity'
 import { useStateValue } from '../../StateProvider'
 
-function CheckoutProduct({ id, title, image, price, rating }) {
+function CheckoutProduct({
+  id,
+  title,
+  image,
+  price,
+  rating,
+  editMode,
+  quantity,
+}) {
   const [{ basket }, dispatch] = useStateValue()
   const addToBasket = () => {
     dispatch({
@@ -45,8 +53,13 @@ function CheckoutProduct({ id, title, image, price, rating }) {
               </span>
             ))}
         </div>
+        {editMode && (
+          <button onClick={removeFromBasket}>Remove from Basket</button>
+        )}
       </div>
-      <button onClick={removeFromBasket}>Remove from Basket</button>
+      <div className="checkoutProduct__quantity">
+        <Quantity id={id} editMode={editMode} quantity={quantity} />
+      </div>
     </div>
   )
 }

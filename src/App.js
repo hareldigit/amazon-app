@@ -6,6 +6,7 @@ import Checkout from './Components/Checkout/Checkout'
 import Login from './Components/Login/Login'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import useUser from './CustomHooks/useUser'
+import Payment from './Components/Payment/Payment'
 
 function App() {
   const [] = useUser()
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/checkout">
             <Checkout />
+          </Route>
+          <Route path="/payment">
+            <Payment />
           </Route>
           <Route path="/">
             <Home />
