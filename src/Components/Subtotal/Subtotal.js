@@ -10,10 +10,13 @@ function Subtotal() {
   return (
     <div className="subtotal">
       <CurrencyFormat
-        renderText={(value) => (
+        renderText={(innerValue, innerPrefix) => (
           <>
             <p>
-              Subtotal ({totalQuantity} items) <strong>{totalPrice}</strong>
+              Subtotal ({totalQuantity} items){' '}
+              <strong>
+                {innerValue} {innerPrefix}
+              </strong>
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" /> This order contains a gift
@@ -21,7 +24,7 @@ function Subtotal() {
           </>
         )}
         decimalScale={2}
-        value={0}
+        value={totalPrice}
         displayType={'text'}
         thousandSeparator={true}
         prefix={'$'}

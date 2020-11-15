@@ -8,7 +8,6 @@ function useUser() {
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      console.log('THE USER IS >>>>', authUser)
       if (authUser) {
         dispatch({ type: 'SET_USER', user: authUser })
       } else {
@@ -19,10 +18,6 @@ function useUser() {
 
   useEffect(() => {
     setUserName(user?.userName)
-    console.log(
-      'useUser -> setUserName(user?.userName)',
-      setUserName(user?.userName),
-    )
   }, [user])
 
   const handleAuthentication = () => {

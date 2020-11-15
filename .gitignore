@@ -25,3 +25,4 @@ firebase.js
 .firebase
 .firebase*
 firebase.json
+keys.js

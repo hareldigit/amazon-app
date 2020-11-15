@@ -1,7 +1,7 @@
 import React from 'react'
 
-function CurrencyFormat({ renderText }) {
-  return <div>{renderText()}</div>
+function CurrencyFormat({ renderText, value, prefix }) {
+  return <div>{renderText(value, prefix)}</div>
 }
 
 export default CurrencyFormat
