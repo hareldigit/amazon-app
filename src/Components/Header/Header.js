@@ -19,7 +19,7 @@ function Header() {
         <Search className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <Link to={!userName && '/login'}>
+        <Link to={!userName ? '/login' : '#'}>
           <div onClick={handleAuthentication} className="header__option">
             <div className="header__optionLineOne">
               Hello {!userName ? ' Guest' : <b></b>} {userName}

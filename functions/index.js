@@ -19,12 +19,12 @@ app.get('/',(request,response)=>response.status(200).send('hello world'))
 
 app.post('/payments/create',async(request,response)=>{
     const total = request.query.total;
-
     console.log('payment request was received for amount of ==> ', total)
     const paymentIntent = await stripe.paymentIntents.create({
         amount:total,
-        currency:"usd"
-    });
+        currency:"usd",
+        payment_method_types: ['card']
+    })
     response.header('Access-Control-Allow-Origin', '*');
     response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     response.status(201).send({
