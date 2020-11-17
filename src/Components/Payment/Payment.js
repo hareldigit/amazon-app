@@ -8,12 +8,13 @@ import { Link, useHistory } from 'react-router-dom'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import CurrencyFormat from '../CurrencyFormat/CurrencyFormat'
 import axios from '../../axios'
-import { db } from '../../firebase'
+import useStore from '../../CustomHooks/useStore'
 
 function Payment() {
   const [user, userName, handleAuthentication] = useUser()
   const [{ basket }, dispatch] = useStateValue()
   const [totalPrice, totalQuantity] = useTotalBasket()
+  const [saveOrder] = useStore()
   const stripe = useStripe()
   const elements = useElements()
 
@@ -42,6 +43,7 @@ function Payment() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setProcessing(true)
+
     if (clientSecret != null) {
       const payload = await stripe
         .confirmCardPayment(clientSecret, {
@@ -51,25 +53,7 @@ function Payment() {
         })
         .then((response) => {
           if (response.paymentIntent?.id) {
-            db.collection('users')
-              .doc(user?.uid)
-              .collection('orders')
-              .doc(response.paymentIntent.id)
-              .set({
-                basket: basket,
-                amount: response.paymentIntent.amount,
-                created: response.paymentIntent.created,
-              })
-
-            setSucceeded(true)
-            setError(null)
-            setProcessing(false)
-
-            dispatch({
-              type: 'EMPTY_BASKET',
-            })
-
-            history.push('/orders')
+            onPaymentDone(response)
           } else {
             setError(response.error ? response.error.message : '')
           }
@@ -80,6 +64,21 @@ function Payment() {
   const handleChange = (e) => {
     setDisabled(e.empty)
     setError(e.error ? e.error.message : '')
+  }
+
+  function onPaymentDone(response) {
+    saveOrder(
+      response.paymentIntent.id,
+      response.paymentIntent.amount,
+      response.paymentIntent.created,
+    )
+    setSucceeded(true)
+    setError(null)
+    setProcessing(false)
+    dispatch({
+      type: 'EMPTY_BASKET',
+    })
+    history.push('/orders')
   }
 
   return (
@@ -102,8 +101,8 @@ function Payment() {
           </div>
           <div className="payment__items">
             {basket?.map((item, i) => (
-              <React.Fragment key={i}>
                 <CheckoutProduct
+                  key={i}
                   id={item.id}
                   title={item.title}
                   price={item.price}
@@ -111,8 +110,7 @@ function Payment() {
                   rating={item.rating}
                   quantity={item.quantity}
                   editMode={false}
-                />
-              </React.Fragment>
+                />              
             ))}
           </div>
         </div>

@@ -2,3 +2,4 @@ node_modules/
 keys.js
 firebase-debug.log
 firebase-debug.*.log
+*.log
